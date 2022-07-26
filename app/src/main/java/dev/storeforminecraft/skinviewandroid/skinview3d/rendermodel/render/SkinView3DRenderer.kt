@@ -59,7 +59,7 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
         Matrix.translateM(rotationMatrix, 0, 0f, 0f, 0f);
 
         //mangle is how fast, x,y,z which directions it rotates.
-        Matrix.rotateM(rotationMatrix, 0, mAngle, 1.0f, 1.0f, 1.0f);
+        Matrix.rotateM(rotationMatrix, 0, mAngle, 0.0f, 1.0f, 0.0f);
 
         // combine the model with the view matrix
         Matrix.multiplyMM(vPMatrix, 0, viewMatrix, 0, rotationMatrix, 0);

@@ -15,7 +15,7 @@ class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
 
     init {
         val `is`: InputStream = getResources()
-            .openRawResource(R.raw.test2)
+            .openRawResource(R.raw.skin)
         val bitmap: Bitmap
         bitmap = try {
             BitmapFactory.decodeStream(`is`)
