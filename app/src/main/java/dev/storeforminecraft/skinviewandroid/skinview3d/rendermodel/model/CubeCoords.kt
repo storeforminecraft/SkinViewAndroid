@@ -45,9 +45,12 @@ object CubeCoords {
         multiplyZ: Float = 1.0f,
         addX: Float = 0.0f,
         addY: Float = 0.0f,
-        addZ: Float = 0.0f
+        addZ: Float = 0.0f,
+        enlarge: Float = 1.0f,
     ): FloatArray {
-        return cube.mapIndexed { index, fl ->
+        return cube.map {
+            it * enlarge
+        }.mapIndexed { index, fl ->
             when {
                 index % 3 == 0 -> {
                     fl * multiplyX + addX
@@ -62,9 +65,17 @@ object CubeCoords {
         }.toFloatArray()
     }
 
-    fun getSquareIndicies(offset: Short): ShortArray {
+    fun getSquareIndicies(offset: Int): ShortArray {
         return cubeIndicies.map {
             (it + offset).toShort()
         }.toShortArray()
+    }
+
+    fun getCubeIndicies(cubes: Int = 1): ShortArray {
+        val cube = mutableListOf<Short>()
+        for (idx in 1..cubes) {
+            cube.addAll(getSquareIndicies((idx - 1) * 24).toList())
+        }
+        return cube.toShortArray()
     }
 }

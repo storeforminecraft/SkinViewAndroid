@@ -3,84 +3,139 @@ package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model
 object SteveCoords {
     fun getSteveUV(): FloatArray {
         return SteveTextures.getHeadTex() +
+                SteveTextures.getHeadTex(32f, 0f) +
                 SteveTextures.getTorsoTex(16f, 16f) +
+                SteveTextures.getTorsoTex(16f, 32f) +
                 SteveTextures.getLegArmTex(32f, 48f, false) +
+                SteveTextures.getLegArmTex(48f, 48f, false) +
                 SteveTextures.getLegArmTex(40f, 16f, true) +
+                SteveTextures.getLegArmTex(40f, 32f, true) +
                 SteveTextures.getLegArmTex(16f, 48f, false) +
-                SteveTextures.getLegArmTex(0f, 16f, true)+
-                SteveTextures.getHeadTex(32f, 0f)
+                SteveTextures.getLegArmTex(0f, 48f, false) +
+                SteveTextures.getLegArmTex(0f, 16f, true) +
+                SteveTextures.getLegArmTex(0f, 32f, true)
     }
 
     fun getSteve(): Pair<FloatArray, ShortArray> {
         val steveCoords = mutableListOf<Float>()
-        val steveIndicies = mutableListOf<Short>()
+        val steveIndicies = CubeCoords.getCubeIndicies(12)
 
-        val head = CubeCoords.getSquare(addY = CubeCoords.unit * 2.5f)
-        steveCoords.addAll(head.toList())
-        val headIndicies = CubeCoords.getSquareIndicies(0)
-        steveIndicies.addAll(headIndicies.toList())
+        // Head
+        CubeCoords.getSquare(addY = CubeCoords.unit * 2.5f).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        val torso = CubeCoords.getSquare(multiplyZ = 0.5f, multiplyY = 1.5f)
-        steveCoords.addAll(torso.toList())
-        val torsoIndicies = CubeCoords.getSquareIndicies(24)
-        steveIndicies.addAll(torsoIndicies.toList())
+        // Hat
+        CubeCoords.getSquare(
+            addY = CubeCoords.unit * 2.5f,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        val leftArm =
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = -1.5f * CubeCoords.unit
-            )
-        steveCoords.addAll(leftArm.toList())
-        val leftArmIndicies = CubeCoords.getSquareIndicies(48)
-        steveIndicies.addAll(leftArmIndicies.toList())
+        // Torso
+        CubeCoords.getSquare(multiplyZ = 0.5f, multiplyY = 1.5f).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        val rightArm =
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = 1.5f * CubeCoords.unit
-            )
-        steveCoords.addAll(rightArm.toList())
-        val rightArmIndicies = CubeCoords.getSquareIndicies(72)
-        steveIndicies.addAll(rightArmIndicies.toList())
+        // Torso 2nd layer
+        CubeCoords.getSquare(
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        val leftLeg =
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = -CubeCoords.unit * 0.5f,
-                addY = -CubeCoords.unit * 3f
-            )
-        steveCoords.addAll(leftLeg.toList())
-        val leftLegIndicies = CubeCoords.getSquareIndicies(96)
-        steveIndicies.addAll(leftLegIndicies.toList())
+        // Left Arm
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = -1.5f * CubeCoords.unit
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        val rightLeg =
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = 1 * CubeCoords.unit * 0.5f,
-                addY = -CubeCoords.unit * 3f
-            )
-        steveCoords.addAll(rightLeg.toList())
-        val rightLegIndicies = CubeCoords.getSquareIndicies(120)
-        steveIndicies.addAll(rightLegIndicies.toList())
+        // Left Arm 2nd Layer
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = -1.5f * CubeCoords.unit,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        // 0.625 y add
-        val head2 = CubeCoords.getSquare(
-            1.125f, 1.125f, 1.125f,
-            0f, CubeCoords.unit * 2.5f, 0f
-        )
-        steveCoords.addAll(head2.toList())
-        val headIndicies2 = CubeCoords.getSquareIndicies(144)
-        steveIndicies.addAll(headIndicies2.toList())
+        // Right Arm
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = 1.5f * CubeCoords.unit
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
 
-        return Pair(steveCoords.toFloatArray(), steveIndicies.toShortArray())
+        // Right Arm 2nd Layer
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = 1.5f * CubeCoords.unit,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
+
+        // Left Leg
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = -CubeCoords.unit * 0.5f,
+            addY = -CubeCoords.unit * 3f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
+
+        // Left Leg 2nd Layer
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = -CubeCoords.unit * 0.5f,
+            addY = -CubeCoords.unit * 3f,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
+
+        // Right Leg
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = CubeCoords.unit * 0.5f,
+            addY = -CubeCoords.unit * 3f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
+
+        // Right Leg 2nd Layer
+        CubeCoords.getSquare(
+            multiplyX = 0.5f,
+            multiplyZ = 0.5f,
+            multiplyY = 1.5f,
+            addX = CubeCoords.unit * 0.5f,
+            addY = -CubeCoords.unit * 3f,
+            enlarge = 1.125f
+        ).also {
+            steveCoords.addAll(it.toList())
+        }
+
+        return Pair(steveCoords.toFloatArray(), steveIndicies)
     }
 
 
