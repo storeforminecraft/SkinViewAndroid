@@ -1,13 +1,11 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLUtils
-import dev.storeforminecraft.skinviewandroid.libs.BufferUtil
-import dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.render.SkinView3DRenderer.Companion.loadShader
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import dev.storeforminecraft.skinviewandroid.library.libs.BufferUtil
+import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer.Companion.loadShader
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 

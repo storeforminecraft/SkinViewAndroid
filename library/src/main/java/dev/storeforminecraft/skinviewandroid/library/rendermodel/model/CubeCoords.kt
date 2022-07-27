@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
 
 object CubeCoords {
     val unit = 0.5f

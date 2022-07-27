@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.ui
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.ui
 
 import android.app.Activity
 import android.opengl.GLSurfaceView

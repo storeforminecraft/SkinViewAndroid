@@ -1,12 +1,11 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.render
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.render
 
 import android.graphics.Bitmap
-import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.util.Log
-import dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model.Steve
+import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.Steve
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -18,7 +17,8 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
     private val projectionMatrix = FloatArray(16)
     private val viewMatrix = FloatArray(16)
 
-    private var mAngle = 0f
+    var angleY = 0f
+    var angleX = 0f
 
 
     override fun onSurfaceCreated(unused: GL10, config: EGLConfig) {
@@ -40,7 +40,6 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
     private val rotationMatrix = FloatArray(16)
 
     override fun onDrawFrame(unused: GL10) {
-        Log.d("onDrawFrame", mAngle.toString())
         GLES31.glClear(GLES31.GL_COLOR_BUFFER_BIT or GLES31.GL_DEPTH_BUFFER_BIT)
 
         // Redraw background color
@@ -59,7 +58,9 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
         Matrix.translateM(rotationMatrix, 0, 0f, 0f, 0f);
 
         //mangle is how fast, x,y,z which directions it rotates.
-        Matrix.rotateM(rotationMatrix, 0, mAngle, 0.0f, 1.0f, 0.0f);
+        Matrix.rotateM(rotationMatrix, 0, angleY, 0.0f, 1.0f, 0.0f);
+
+        Matrix.rotateM(rotationMatrix, 0, angleX, 1.0f, 0.0f, 0.0f);
 
         // combine the model with the view matrix
         Matrix.multiplyMM(vPMatrix, 0, viewMatrix, 0, rotationMatrix, 0);
@@ -70,7 +71,7 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
         // Draw shape
         steve.draw(vPMatrix)
 
-        mAngle += 0.5f
+//        angleY += 0.3f
     }
 
     override fun onSurfaceChanged(unused: GL10, width: Int, height: Int) {
@@ -88,4 +89,6 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
             }
         }
     }
+
+
 }

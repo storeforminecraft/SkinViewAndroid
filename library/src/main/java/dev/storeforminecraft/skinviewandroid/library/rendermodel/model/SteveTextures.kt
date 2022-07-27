@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
 
 import java.util.*
 
@@ -29,7 +29,7 @@ object SteveTextures {
     fun getLegArmTex(offsetU: Float = 0f, offsetV: Float = 0f, right: Boolean): FloatArray {
         val tex = floatArrayOf(
             // back
-            12f, 4f, 16f, 4f, 12f, 16f, 16f, 16f,
+            16f, 4f, 12f, 4f, 16f, 16f, 12f, 16f,
             // front
             4f, 4f, 8f, 4f, 4f, 16f, 8f, 16f,
             // outside
@@ -48,11 +48,6 @@ object SteveTextures {
             }
         }.map { it / 64f }
 
-        if (right) {
-            for (idx in 16..23)
-                Collections.swap(tex, idx, idx + 8)
-        }
-
         return tex.toFloatArray()
     }
 
@@ -61,7 +56,7 @@ object SteveTextures {
             // back
             16f, 4f, 24f, 4f, 16f, 16f, 24f, 16f,
             // front
-            4f, 4f, 12f, 4f, 12f, 16f, 12f, 16f,
+            4f, 4f, 12f, 4f, 4f, 16f, 12f, 16f,
             // left
             0f, 4f, 4f, 4f, 0f, 16f, 4f, 16f,
             // right

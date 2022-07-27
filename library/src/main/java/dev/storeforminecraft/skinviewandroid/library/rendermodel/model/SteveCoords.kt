@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.skinview3d.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
 
 object SteveCoords {
     fun getSteveUV(): FloatArray {
@@ -35,7 +35,7 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = -1.5f * CubeCoords.unit
+            addX = 1.5f * CubeCoords.unit
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -45,7 +45,7 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = 1.5f * CubeCoords.unit
+            addX = -1.5f * CubeCoords.unit
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -55,7 +55,7 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = -CubeCoords.unit * 0.5f,
+            addX = CubeCoords.unit * 0.5f,
             addY = -CubeCoords.unit * 3f
         ).also {
             steveCoords.addAll(it.toList())
@@ -66,7 +66,7 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = CubeCoords.unit * 0.5f,
+            addX = -CubeCoords.unit * 0.5f,
             addY = -CubeCoords.unit * 3f
         ).also {
             steveCoords.addAll(it.toList())
@@ -84,7 +84,7 @@ object SteveCoords {
         CubeCoords.getSquare(
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            enlarge = 1.05f
+            enlarge = 1.125f
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -94,8 +94,8 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = -1.5f * CubeCoords.unit,
-            enlarge = 1.05f
+            addX = 1.5f * CubeCoords.unit,
+            enlarge = 1.125f
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -105,8 +105,8 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = 1.5f * CubeCoords.unit,
-            enlarge = 1.05f
+            addX = -1.5f * CubeCoords.unit,
+            enlarge = 1.125f
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -116,9 +116,9 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = -CubeCoords.unit * 0.5f,
+            addX = CubeCoords.unit * 0.5f,
             addY = -CubeCoords.unit * 3f,
-            enlarge = 1.08f
+            enlarge = 1.125f
         ).also {
             steveCoords.addAll(it.toList())
         }
@@ -128,9 +128,9 @@ object SteveCoords {
             multiplyX = 0.5f,
             multiplyZ = 0.5f,
             multiplyY = 1.5f,
-            addX = CubeCoords.unit * 0.5f,
+            addX = -CubeCoords.unit * 0.5f,
             addY = -CubeCoords.unit * 3f,
-            enlarge = 1.08f
+            enlarge = 1.125f
         ).also {
             steveCoords.addAll(it.toList())
         }

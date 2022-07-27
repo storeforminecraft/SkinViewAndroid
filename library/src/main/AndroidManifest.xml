@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dev.storeforminecraft.skinviewandroid.library">
+
+    <uses-feature
+        android:glEsVersion="0x00030001"
+        android:required="true" />
+
+    <application>
+        <activity
+            android:name=".rendermodel.ui.SkinView3DActivity"
+            android:exported="true">
+        </activity>
+    </application>
+</manifest>

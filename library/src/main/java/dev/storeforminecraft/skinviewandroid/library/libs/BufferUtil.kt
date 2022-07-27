@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.libs
+package dev.storeforminecraft.skinviewandroid.library.libs
 
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
