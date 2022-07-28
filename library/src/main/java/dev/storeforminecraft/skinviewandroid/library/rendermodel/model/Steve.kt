@@ -40,7 +40,6 @@ class Steve(val bitmap: Bitmap) {
                 "uniform sampler2D s_texture;" +
                 "uniform vec4 vColor;" +
                 "void main() {" +
-//                "  gl_FragColor = vColor;" +
                 "  gl_FragColor = texture2D(s_texture, v_texCoord);" +
                 "}"
 
@@ -114,9 +113,6 @@ class Steve(val bitmap: Bitmap) {
 
         val vPMatrixHandle = GLES31.glGetUniformLocation(program, "uMVPMatrix")
         GLES31.glUniformMatrix4fv(vPMatrixHandle, 1, false, mvpMatrix, 0)
-
-//        val colorHandle = GLES31.glGetUniformLocation(program, "vColor")
-//        GLES31.glUniform4fv(colorHandle, 1, color, 0)
 
         val textureCoordHandle = GLES31.glGetAttribLocation(program, "a_texCoord")
         GLES31.glEnableVertexAttribArray(textureCoordHandle)

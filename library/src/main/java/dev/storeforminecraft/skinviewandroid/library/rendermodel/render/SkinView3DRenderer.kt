@@ -1,17 +1,16 @@
 package dev.storeforminecraft.skinviewandroid.library.rendermodel.render
 
 import android.graphics.Bitmap
+import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import android.util.Log
 import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.Steve
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
+class SkinView3DRenderer : GLSurfaceView.Renderer {
 
-    lateinit var steve : Steve
 
     private val vPMatrix = FloatArray(16)
     private val projectionMatrix = FloatArray(16)
@@ -19,7 +18,8 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
 
     var angleY = 0f
     var angleX = 0f
-
+    var bitmap: Bitmap? = null
+    lateinit var steve: Steve
 
     override fun onSurfaceCreated(unused: GL10, config: EGLConfig) {
         // Set the background frame color
@@ -29,12 +29,14 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
 
         GLES31.glEnable(GLES31.GL_BLEND)
         GLES31.glBlendFunc(GLES31.GL_SRC_ALPHA, GLES31.GL_ONE_MINUS_SRC_ALPHA)
-//
-//        GLES20.glEnable(GLES20.GL_CULL_FACE)
-//        GLES20.glFrontFace(GLES20.GL_CW) // 방향 설정인 듯?
-//        GLES20.glCullFace(GLES20.GL_BACK)
-//
-        steve = Steve(bitmap)
+
+        GLES31.glFrontFace(GLES31.GL_CCW)
+        GLES31.glCullFace(GLES31.GL_BACK)
+        GLES31.glEnable(GLES31.GL_CULL_FACE)
+
+        bitmap?.also {
+            steve = Steve(it)
+        }
     }
 
     private val rotationMatrix = FloatArray(16)
@@ -46,10 +48,12 @@ class SkinView3DRenderer(val bitmap: Bitmap) : GLSurfaceView.Renderer {
         GLES31.glClear(GLES31.GL_COLOR_BUFFER_BIT)
 
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(viewMatrix, 0,
+        Matrix.setLookAtM(
+            viewMatrix, 0,
             0.0f, 0.0f, 7.0f,
             0.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f)
+            0.0f, 1.0f, 0.0f
+        )
 
         // Create a rotation and translation for the cube
         Matrix.setIdentityM(rotationMatrix, 0);

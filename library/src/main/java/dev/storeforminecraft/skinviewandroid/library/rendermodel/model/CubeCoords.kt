@@ -1,42 +1,50 @@
 package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
 
+/**
+ * 1 - - - - 4
+ * |         |
+ * |         |
+ * |         |
+ * 2 - - - - 3
+ */
+
 object CubeCoords {
     val unit = 0.5f
 
     val cube = floatArrayOf(
-        -unit, unit, -unit, /* Back. */
-        unit, unit, -unit,
-        -unit, -unit, -unit,
+        unit, unit, -unit, /* Back. */
         unit, -unit, -unit,
+        -unit, -unit, -unit,
+        -unit, unit, -unit,
         -unit, unit, unit, /* Front. */
-        unit, unit, unit,
         -unit, -unit, unit,
         unit, -unit, unit,
+        unit, unit, unit,
         -unit, unit, -unit, /* Left. */
-        -unit, unit, unit,
         -unit, -unit, -unit,
         -unit, -unit, unit,
+        -unit, unit, unit,
         unit, unit, unit, /* Right. */
-        unit, unit, -unit,
         unit, -unit, unit,
         unit, -unit, -unit,
-        -unit, unit, -unit, /* Top. */
         unit, unit, -unit,
+        -unit, unit, -unit, /* Top. */
         -unit, unit, unit,
         unit, unit, unit,
-        -unit, -unit, -unit, /* Bottom. */
-        unit, -unit, -unit,
-        -unit, -unit, unit,
+        unit, unit, -unit,
+        unit, -unit, -unit, /* Bottom. */
         unit, -unit, unit,
+        -unit, -unit, unit,
+        -unit, -unit, -unit,
     )
 
     val cubeIndicies = shortArrayOf(
-        0, 2, 3, 0, 1, 3,
-        4, 6, 7, 4, 5, 7,
-        8, 10, 11, 8, 9, 11,
-        12, 14, 15, 12, 13, 15,
-        16, 18, 19, 16, 17, 19,
-        20, 22, 23, 20, 21, 23
+        0, 1, 2, 0, 2, 3,
+        4, 5, 6, 4, 6, 7,
+        8, 9, 10, 8, 10, 11,
+        12, 13, 14, 12, 14, 15,
+        16, 17, 18, 16, 18, 19,
+        20, 21, 22, 20, 22, 23
     )
 
     fun getSquare(

@@ -5,6 +5,9 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
+/**
+ * GL ES buffer related utils
+ */
 object BufferUtil {
     fun createFloatBuffer(array: FloatArray) : FloatBuffer{
         // (number of coordinate values * 4 bytes per float)
