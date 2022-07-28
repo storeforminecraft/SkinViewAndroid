@@ -8,30 +8,23 @@ import android.util.Log
 import android.view.MotionEvent
 import androidx.constraintlayout.widget.ConstraintSet
 import dev.storeforminecraft.skinviewandroid.library.R
+import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.Steve
 import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer
 import java.io.IOException
 import java.io.InputStream
 
 class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
 
-    private val renderer: SkinView3DRenderer
+    var renderer: SkinView3DRenderer? = null
 
     init {
-        val `is`: InputStream = getResources()
-            .openRawResource(R.raw.creep)
-        val bitmap: Bitmap
-        bitmap = try {
-            BitmapFactory.decodeStream(`is`)
-        } finally {
-            try {
-                `is`.close()
-            } catch (e: IOException) {
-                // Ignore.
-            }
-        }
-
         setEGLContextClientVersion(3)
-        renderer = SkinView3DRenderer(bitmap)
+    }
+
+    fun render(skin: Bitmap) {
+        renderer = SkinView3DRenderer().apply {
+            bitmap = skin
+        }
         setRenderer(renderer)
     }
 
@@ -42,6 +35,7 @@ class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
     private var previousY: Float = 0f
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
+        if (renderer == null) return false
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
         // interested in events where the touch position changed.
@@ -60,13 +54,13 @@ class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
                     dx *= -1
                 }
 
-                // reverse direction of rotation to left of the mid-line
-                if (x < width / 2) {
-                    dy *= -1
-                }
+//                // reverse direction of rotation to left of the mid-line
+//                if (x < width / 2) {
+//                    dy *= -1
+//                }
 
-                renderer.angleY -= (dx) * TOUCH_SCALE_FACTOR
-                renderer.angleX += (dy) * TOUCH_SCALE_FACTOR
+                renderer!!.angleY -= (dx) * TOUCH_SCALE_FACTOR
+                renderer!!.angleX += (dy) * TOUCH_SCALE_FACTOR
 
                 requestRender()
             }
