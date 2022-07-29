@@ -2,16 +2,9 @@ package dev.storeforminecraft.skinviewandroid.library.rendermodel.ui
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.opengl.GLSurfaceView
-import android.util.Log
 import android.view.MotionEvent
-import androidx.constraintlayout.widget.ConstraintSet
-import dev.storeforminecraft.skinviewandroid.library.R
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.Steve
 import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer
-import java.io.IOException
-import java.io.InputStream
 
 class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
 
