@@ -9,9 +9,9 @@ package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
  */
 
 object CubeCoords {
-    val unit = 0.5f
+    const val unit = 0.5f
 
-    val cube = floatArrayOf(
+    private val cube = floatArrayOf(
         unit, unit, -unit, /* Back. */
         unit, -unit, -unit,
         -unit, -unit, -unit,
@@ -38,7 +38,7 @@ object CubeCoords {
         -unit, -unit, -unit,
     )
 
-    val cubeIndicies = shortArrayOf(
+    private val cubeIndicies = shortArrayOf(
         0, 1, 2, 0, 2, 3,
         4, 5, 6, 4, 6, 7,
         8, 9, 10, 8, 10, 11,
@@ -73,7 +73,7 @@ object CubeCoords {
         }.toFloatArray()
     }
 
-    fun getSquareIndicies(offset: Int): ShortArray {
+    private fun getSquareIndicies(offset: Int): ShortArray {
         return cubeIndicies.map {
             (it + offset).toShort()
         }.toShortArray()

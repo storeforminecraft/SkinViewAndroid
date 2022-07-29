@@ -8,7 +8,7 @@ import dev.storeforminecraft.skinviewandroid.library.rendermodel.ui.SkinView3DSu
 import java.io.IOException
 import java.io.InputStream
 
-class MainActivity : AppCompatActivity() {
+class  MainActivity : AppCompatActivity() {
 
     private lateinit var gLView: SkinView3DSurfaceView
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         gLView = SkinView3DSurfaceView(this)
 
         val `is`: InputStream = resources
-            .openRawResource(R.raw.steve)
+            .openRawResource(R.raw.skin_steve)
         val bitmap: Bitmap = try {
             BitmapFactory.decodeStream(`is`)
         } finally {

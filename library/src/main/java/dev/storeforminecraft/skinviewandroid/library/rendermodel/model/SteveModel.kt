@@ -5,20 +5,12 @@ import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLUtils
 import dev.storeforminecraft.skinviewandroid.library.libs.BufferUtil
+import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.textures.SteveTextures
 import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer.Companion.loadShader
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
-class Steve(val bitmap: Bitmap) {
-
-    val steve = SteveCoords.getSteve()
-
-    val headCoords = steve.first
-
-    val headIndicies = steve.second
-
-    val textureCoords = SteveCoords.getSteveUV()
-
+class SteveModel(val bitmap: Bitmap) {
     private val vertexShaderCode =
     // This matrix member variable provides a hook to manipulate
         // the coordinates of the objects that use this vertex shader
@@ -28,9 +20,6 @@ class Steve(val bitmap: Bitmap) {
                 "varying vec2 v_texCoord;" +
                 "void main() {" +
                 "  v_texCoord = a_texCoord;" +
-                // the matrix must be included as a modifier of gl_Position
-                // Note that the uMVPMatrix factor *must be first* in order
-                // for the matrix multiplication product to be correct.
                 "  gl_Position = uMVPMatrix * vPosition;" +
                 "}"
 
@@ -43,33 +32,44 @@ class Steve(val bitmap: Bitmap) {
                 "  gl_FragColor = texture2D(s_texture, v_texCoord);" +
                 "}"
 
-    private val textureBuffer: FloatBuffer = BufferUtil.createFloatBuffer(textureCoords)
-
-    private val vertexBuffer: FloatBuffer = BufferUtil.createFloatBuffer(headCoords)
-
-    private val drawListBuffer: ShortBuffer = BufferUtil.createShortBuffer(headIndicies)
-
-    val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
-
     private var program: Int
+
+    private val steveModelType: ModelTextureType
+    private val steveTextureCoords: FloatArray
+    private val steveModelCoords: FloatArray
+    private val steveModelDrawOrder: ShortArray
+
+    private val textureBuffer: FloatBuffer
+
+    private val vertexBuffer: FloatBuffer
+
+    private val drawListBuffer: ShortBuffer
 
     init {
         val vertexShader: Int = loadShader(GLES31.GL_VERTEX_SHADER, vertexShaderCode)
         val fragmentShader: Int = loadShader(GLES31.GL_FRAGMENT_SHADER, fragmentShaderCode)
 
+        steveModelType =
+            if (bitmap.width == bitmap.height) ModelTextureType.RATIO_1_1 else ModelTextureType.RATIO_2_1
+
+        val steve = SteveCoords.getSteve(steveModelType)
+        steveModelCoords = steve.first
+        steveModelDrawOrder = steve.second
+        steveTextureCoords = SteveTextures.getSteveTexture(steveModelType)
+
+        vertexBuffer = BufferUtil.createFloatBuffer(steveModelCoords)
+        drawListBuffer = BufferUtil.createShortBuffer(steveModelDrawOrder)
+        textureBuffer = BufferUtil.createFloatBuffer(steveTextureCoords)
+
         // create empty OpenGL ES Program
         program = GLES31.glCreateProgram().also {
-
             // add the vertex shader to program
             GLES31.glAttachShader(it, vertexShader)
-
             // add the fragment shader to program
             GLES31.glAttachShader(it, fragmentShader)
-
             // creates OpenGL ES program executables
             GLES31.glLinkProgram(it)
         }
-
         loadTexture()
     }
 
@@ -116,7 +116,14 @@ class Steve(val bitmap: Bitmap) {
 
         val textureCoordHandle = GLES31.glGetAttribLocation(program, "a_texCoord")
         GLES31.glEnableVertexAttribArray(textureCoordHandle)
-        GLES31.glVertexAttribPointer(textureCoordHandle, 2, GLES31.GL_FLOAT, false, 2 * 4, textureBuffer)
+        GLES31.glVertexAttribPointer(
+            textureCoordHandle,
+            2,
+            GLES31.GL_FLOAT,
+            false,
+            2 * 4,
+            textureBuffer
+        )
 
         GLES31.glGetUniformLocation(program, "s_texture").also { textureHandle ->
             GLES31.glUniform1i(textureHandle, 0)
@@ -124,7 +131,7 @@ class Steve(val bitmap: Bitmap) {
 
         GLES31.glDrawElements(
             GLES31.GL_TRIANGLES,
-            headIndicies.size,
+            steveModelDrawOrder.size,
             GLES31.GL_UNSIGNED_SHORT,
             drawListBuffer
         )
