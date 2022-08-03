@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.ui.SkinView3DSurfaceView
+import dev.storeforminecraft.skinviewandroid.library.threedimension.ui.SkinView3DSurfaceView
 import java.io.IOException
 import java.io.InputStream
 

@@ -1,15 +1,19 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.threedimension.model
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLUtils
 import dev.storeforminecraft.skinviewandroid.library.libs.BufferUtil
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.textures.SteveTextures
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer.Companion.loadShader
+import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
+import dev.storeforminecraft.skinviewandroid.library.threedimension.model.texture.Steve3DTexture
+import dev.storeforminecraft.skinviewandroid.library.threedimension.render.SkinView3DRenderer.Companion.loadShader
 import java.nio.FloatBuffer
 import java.nio.ShortBuffer
 
+/**
+ * Minecraft Character Model for OpenGl render
+ */
 class SteveModel(val bitmap: Bitmap) {
     private val vertexShaderCode =
     // This matrix member variable provides a hook to manipulate
@@ -34,7 +38,7 @@ class SteveModel(val bitmap: Bitmap) {
 
     private var program: Int
 
-    private val steveModelType: ModelTextureType
+    private val steveModelType: ModelSourceTextureType
     private val steveTextureCoords: FloatArray
     private val steveModelCoords: FloatArray
     private val steveModelDrawOrder: ShortArray
@@ -50,12 +54,12 @@ class SteveModel(val bitmap: Bitmap) {
         val fragmentShader: Int = loadShader(GLES31.GL_FRAGMENT_SHADER, fragmentShaderCode)
 
         steveModelType =
-            if (bitmap.width == bitmap.height) ModelTextureType.RATIO_1_1 else ModelTextureType.RATIO_2_1
+            if (bitmap.width == bitmap.height) ModelSourceTextureType.RATIO_1_1 else ModelSourceTextureType.RATIO_2_1
 
         val steve = SteveCoords.getSteve(steveModelType)
         steveModelCoords = steve.first
         steveModelDrawOrder = steve.second
-        steveTextureCoords = SteveTextures.getSteveTexture(steveModelType)
+        steveTextureCoords = Steve3DTexture.getSteveTexture(steveModelType)
 
         vertexBuffer = BufferUtil.createFloatBuffer(steveModelCoords)
         drawListBuffer = BufferUtil.createShortBuffer(steveModelDrawOrder)

@@ -1,10 +1,15 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.threedimension.model
 
+import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
+
+/**
+ * Minecraft Skin Model Coordinates (char.png)
+ */
 object SteveCoords {
-    fun getSteve(modelType: ModelTextureType): Pair<FloatArray, ShortArray> {
+    fun getSteve(modelType: ModelSourceTextureType): Pair<FloatArray, ShortArray> {
         val steveCoords = mutableListOf<Float>()
         val steveIndicies =
-            CubeCoords.getCubeIndicies(if (modelType == ModelTextureType.RATIO_1_1) 12 else 7)
+            CubeCoords.getCubeIndicies(if (modelType == ModelSourceTextureType.RATIO_1_1) 12 else 7)
 
 
         // Head
@@ -67,7 +72,7 @@ object SteveCoords {
             steveCoords.addAll(it.toList())
         }
 
-        if (modelType == ModelTextureType.RATIO_1_1) {
+        if (modelType == ModelSourceTextureType.RATIO_1_1) {
             // Torso 2nd layer
             CubeCoords.getSquare(
                 multiplyZ = 0.5f,

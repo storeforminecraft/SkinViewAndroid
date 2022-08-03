@@ -8,7 +8,7 @@
 
     <application>
         <activity
-            android:name=".rendermodel.ui.SkinView3DActivity"
+            android:name=".threedimension.ui.SkinView3DActivity"
             android:exported="true">
         </activity>
     </application>

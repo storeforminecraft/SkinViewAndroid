@@ -1,10 +1,10 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.render
+package dev.storeforminecraft.skinviewandroid.library.threedimension.render
 
 import android.graphics.Bitmap
 import android.opengl.GLES31
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.SteveModel
+import dev.storeforminecraft.skinviewandroid.library.threedimension.model.SteveModel
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -74,7 +74,7 @@ class SkinView3DRenderer : GLSurfaceView.Renderer {
         // Draw shape
         steve.draw(vPMatrix)
 
-//        angleY += 0.3f
+        angleY += 0.2f
     }
 
     override fun onSurfaceChanged(unused: GL10, width: Int, height: Int) {

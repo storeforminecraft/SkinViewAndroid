@@ -1,10 +1,10 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.model.textures
+package dev.storeforminecraft.skinviewandroid.library.threedimension.model.texture
 
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.model.ModelTextureType
+import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
 
-object SteveTextures {
-    fun getSteveTexture(type: ModelTextureType): FloatArray {
-        if (type == ModelTextureType.RATIO_2_1) {
+object Steve3DTexture {
+    fun getSteveTexture(type: ModelSourceTextureType): FloatArray {
+        if (type == ModelSourceTextureType.RATIO_2_1) {
             return getHeadTex(type) +
                     getTorsoTex(type, 16f, 16f) +
                     getLegArmTex(type, 40f, 16f) +
@@ -12,7 +12,7 @@ object SteveTextures {
                     getLegArmTex(type, 0f, 16f) +
                     getLegArmTex(type, 0f, 16f) +
                     getHeadTex(type, 32f, 0f)
-        } else if (type == ModelTextureType.RATIO_1_1) {
+        } else if (type == ModelSourceTextureType.RATIO_1_1) {
             return getHeadTex(type) +
                     getTorsoTex(type, 16f, 16f) +
                     getLegArmTex(type, 32f, 48f) +
@@ -29,7 +29,7 @@ object SteveTextures {
         return floatArrayOf()
     }
 
-    fun getHeadTex(type: ModelTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
+    fun getHeadTex(type: ModelSourceTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
         return floatArrayOf(
             // back
             32f, 8f, 32f, 16f, 24f, 16f, 24f, 8f,
@@ -50,7 +50,7 @@ object SteveTextures {
                 fl + offsetV
             }
         }.mapIndexed { index, fl ->
-            if (index % 2 != 0 && type == ModelTextureType.RATIO_2_1) {
+            if (index % 2 != 0 && type == ModelSourceTextureType.RATIO_2_1) {
                 fl / 32f
             } else {
                 fl / 64f
@@ -59,7 +59,7 @@ object SteveTextures {
     }
 
     fun getLegArmTex(
-        type: ModelTextureType,
+        type: ModelSourceTextureType,
         offsetU: Float = 0f,
         offsetV: Float = 0f,
     ): FloatArray {
@@ -83,7 +83,7 @@ object SteveTextures {
                 fl + offsetV
             }
         }.mapIndexed { index, fl ->
-            if (index % 2 != 0 && type == ModelTextureType.RATIO_2_1) {
+            if (index % 2 != 0 && type == ModelSourceTextureType.RATIO_2_1) {
                 fl / 32f
             } else {
                 fl / 64f
@@ -94,7 +94,7 @@ object SteveTextures {
     }
 
 
-    fun getTorsoTex(type: ModelTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
+    fun getTorsoTex(type: ModelSourceTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
         return floatArrayOf(
             // back
             24f, 4f, 24f, 16f, 16f, 16f, 16f, 4f,
@@ -115,7 +115,7 @@ object SteveTextures {
                 fl + offsetV
             }
         }.mapIndexed { index, fl ->
-            if (index % 2 != 0 && type == ModelTextureType.RATIO_2_1) {
+            if (index % 2 != 0 && type == ModelSourceTextureType.RATIO_2_1) {
                 fl / 32f
             } else {
                 fl / 64f

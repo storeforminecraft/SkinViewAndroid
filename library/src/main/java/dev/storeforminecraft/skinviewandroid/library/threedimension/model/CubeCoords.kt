@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.model
+package dev.storeforminecraft.skinviewandroid.library.threedimension.model
 
 /**
  * 1 - - - - 4

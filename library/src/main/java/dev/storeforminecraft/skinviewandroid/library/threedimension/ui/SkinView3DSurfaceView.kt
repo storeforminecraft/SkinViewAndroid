@@ -1,10 +1,10 @@
-package dev.storeforminecraft.skinviewandroid.library.rendermodel.ui
+package dev.storeforminecraft.skinviewandroid.library.threedimension.ui
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
-import dev.storeforminecraft.skinviewandroid.library.rendermodel.render.SkinView3DRenderer
+import dev.storeforminecraft.skinviewandroid.library.threedimension.render.SkinView3DRenderer
 
 class SkinView3DSurfaceView(context: Context) : GLSurfaceView(context) {
 
