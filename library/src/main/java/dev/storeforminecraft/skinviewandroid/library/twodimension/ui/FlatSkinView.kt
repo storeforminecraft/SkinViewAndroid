@@ -13,28 +13,12 @@ import java.io.InputStream
 
 class FlatSkinView : View {
 
-    private val SCALE = 32
+    private lateinit var steveFrontTex: SteveFrontTexture
 
-    private var skinBitmap: Bitmap? = null
-
-    private var steveFrontTex: SteveFrontTexture
+    private var scale = 32
+    private var halfSkinMode = false
 
     constructor(context: Context) : super(context) {
-        val `is`: InputStream = resources
-            .openRawResource(R.raw.test2)
-
-        val bitmap: Bitmap = try {
-            BitmapFactory.decodeStream(`is`)
-        } finally {
-            try {
-                `is`.close()
-            } catch (e: IOException) {
-            }
-        }
-        skinBitmap = bitmap
-        steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
-            scale(SCALE)
-        }
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
@@ -42,27 +26,35 @@ class FlatSkinView : View {
         attrs,
         defStyle
     ) {
-
-        val `is`: InputStream = resources
-            .openRawResource(R.raw.test2)
-
-        val bitmap: Bitmap = try {
-            BitmapFactory.decodeStream(`is`)
-        } finally {
-            try {
-                `is`.close()
-            } catch (e: IOException) {
-            }
-        }
-        skinBitmap = bitmap
-        steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
-            scale(SCALE)
-        }
+        applyAttrs(context, attrs)
     }
 
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {
-        val `is`: InputStream = resources
-            .openRawResource(R.raw.test2)
+        applyAttrs(context, attrs)
+    }
+
+    private fun applyAttrs(context: Context, attrs: AttributeSet) {
+        val at = context.obtainStyledAttributes(attrs, R.styleable.FlatSkinView, 0, 0)
+
+        var skinRes: Int = R.raw.skin_steve
+
+        for (i in 0 until at.indexCount) {
+            val attr = at.getIndex(i)
+            when (attr) {
+                R.styleable.FlatSkinView_skin -> {
+                    val ref = at.getResourceId(R.styleable.FlatSkinView_skin, -1)
+                    skinRes = ref
+                }
+                R.styleable.FlatSkinView_halfview -> {
+                    halfSkinMode = at.getBoolean(R.styleable.FlatSkinView_halfview, false)
+                }
+                R.styleable.FlatSkinView_scale -> {
+                    scale = at.getInt(R.styleable.FlatSkinView_scale, 32)
+                }
+            }
+        }
+
+        val `is`: InputStream = resources.openRawResource(skinRes)
 
         val bitmap: Bitmap = try {
             BitmapFactory.decodeStream(`is`)
@@ -72,82 +64,27 @@ class FlatSkinView : View {
             } catch (e: IOException) {
             }
         }
-        skinBitmap = bitmap
-        steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
-            scale(SCALE)
-        }
+
+        renderSkin(bitmap)
+        at.recycle()
     }
 
-//    private fun applyAttrs(context: Context, attrs: AttributeSet) {
-//        context.obtainStyledAttributes(attrs, R.styleable.FlatSkinView, 0, 0).also {
-//            val ref = it.getResourceId(R.styleable.FlatSkinView_skin, -1)
-//
-//            val `is`: InputStream = resources
-//                .openRawResource(ref)
-//
-//            val bitmap: Bitmap = try {
-//                BitmapFactory.decodeStream(`is`)
-//            } finally {
-//                try {
-//                    `is`.close()
-//                } catch (e: IOException) {
-//                }
-//            }
-//            skinBitmap = bitmap
-//        }
-//
-//
-//    }
+    fun renderSkin(bitmap: Bitmap) {
+        steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
+            scale(scale)
+        }
+        bitmap.recycle()
+        invalidate()
+    }
 
-//    private fun refine() {
-//        val head = Bitmap.createBitmap(skinBitmap!!, 8, 8, 8, 8)
-//            .scale(8 * SCALE, 8 * SCALE, false)
-//        skinParts.add(head)
-//
-//        val torso = Bitmap.createBitmap(skinBitmap!!, 20, 20, 8, 12)
-//            .scale(8 * SCALE, 12 * SCALE, false)
-//        skinParts.add(torso)
-//
-//        val leftarm = Bitmap.createBitmap(skinBitmap!!, 36, 52, 4, 12)
-//            .scale(4 * SCALE, 12 * SCALE, false)
-//        skinParts.add(leftarm)
-//
-//        val rightarm = Bitmap.createBitmap(skinBitmap!!, 44, 20, 4, 12)
-//            .scale(4 * SCALE, 12 * SCALE, false)
-//        skinParts.add(rightarm)
-//
-//        val leftleg = Bitmap.createBitmap(skinBitmap!!, 20, 52, 4, 12)
-//            .scale(4 * SCALE, 12 * SCALE, false)
-//        skinParts.add(leftleg)
-//
-//        val rightleg = Bitmap.createBitmap(skinBitmap!!, 4, 20, 4, 12)
-//            .scale(4 * SCALE, 12 * SCALE, false)
-//        skinParts.add(rightleg)
-//
-//        val hat = Bitmap.createBitmap(skinBitmap!!, 40, 8, 8, 8)
-//            .scale((8 * SCALE * 1.125f).toInt(), (8 * SCALE * 1.125f).toInt(), false)
-//        skinParts.add(hat)
-//
-//        val torso2nd = Bitmap.createBitmap(skinBitmap!!, 20, 36, 8, 12)
-//            .scale((8 * SCALE * 1.1f).toInt(), (12 * SCALE * 1.1f).toInt(), false)
-//        skinParts.add(torso2nd)
-//
-//        val leftarm2nd = Bitmap.createBitmap(skinBitmap!!, 52, 52, 4, 12)
-//            .scale((4 * SCALE * 1.1f).toInt(), (12 * SCALE * 1.1f).toInt(), false)
-//        skinParts.add(leftarm2nd)
-//
-//        val rightarm2nd = Bitmap.createBitmap(skinBitmap!!, 44, 36, 4, 12)
-//            .scale((4 * SCALE * 1.1f).toInt(), (12 * SCALE * 1.1f).toInt(), false)
-//        skinParts.add(rightarm2nd)
-//
-//        val leftleg2nd = Bitmap.createBitmap(skinBitmap!!, 4, 52, 4, 12)
-//            .scale((4 * SCALE * 1.1f).toInt(), (12 * SCALE * 1.1f).toInt(), false)
-//        skinParts.add(leftarm2nd)
-//
-//        val rightleg2nd = Bitmap.createBitmap(skinBitmap!!, 4, 36, 4, 12)
-//            .scale((4 * SCALE * 1.1f).toInt(), (12 * SCALE * 1.1f).toInt(), false)
-//        skinParts.add(rightarm2nd)
-//    }
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        if (halfSkinMode)
+            setMeasuredDimension(16 * scale, 32 * scale / 2)
+        else
+            setMeasuredDimension(16 * scale, 32 * scale)
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -158,27 +95,6 @@ class FlatSkinView : View {
             tex.head.let {
                 canvas.drawBitmap(it, tex.leftArm.width, 0, null)
             }
-            tex.torso.let {
-                canvas.drawBitmap(it, tex.leftArm.width, tex.head.height, null)
-            }
-            tex.leftArm.let {
-                canvas.drawBitmap(it, 0, tex.head.height, null)
-            }
-            tex.rightArm.let {
-                canvas.drawBitmap(it, tex.leftLeg.width + tex.torso.width, tex.head.height, null)
-            }
-            tex.leftLeg.let {
-                canvas.drawBitmap(it, tex.leftArm.width, tex.head.height + tex.torso.height, null)
-            }
-            tex.rightLeg.let {
-                canvas.drawBitmap(
-                    it,
-                    tex.leftArm.width + tex.leftLeg.width,
-                    tex.head.height + tex.torso.height,
-                    null
-                )
-            }
-
             tex.hat.let {
                 canvas.drawBitmap(
                     it,
@@ -188,6 +104,9 @@ class FlatSkinView : View {
                 )
             }
 
+            tex.torso.let {
+                canvas.drawBitmap(it, tex.leftArm.width, tex.head.height, null)
+            }
             tex.torso2nd?.let {
                 canvas.drawBitmap(
                     it,
@@ -197,6 +116,9 @@ class FlatSkinView : View {
                 )
             }
 
+            tex.leftArm.let {
+                canvas.drawBitmap(it, 0, tex.head.height, null)
+            }
             tex.leftArm2nd?.let {
                 canvas.drawBitmap(
                     it,
@@ -206,6 +128,14 @@ class FlatSkinView : View {
                 )
             }
 
+            tex.rightArm.let {
+                canvas.drawBitmap(
+                    it,
+                    tex.leftLeg.width + tex.torso.width,
+                    tex.head.height,
+                    null
+                )
+            }
             tex.rightArm2nd?.let {
                 canvas.drawBitmap(
                     it,
@@ -214,11 +144,30 @@ class FlatSkinView : View {
                 )
             }
 
+            if (halfSkinMode) return@let
+
+            tex.leftLeg.let {
+                canvas.drawBitmap(
+                    it,
+                    tex.leftArm.width,
+                    tex.head.height + tex.torso.height,
+                    null
+                )
+            }
             tex.leftLeg2nd?.let {
                 canvas.drawBitmap(
                     it,
                     tex.leftArm.width - it.calcLayerLeftOffset(tex.leftLeg),
                     tex.head.height + tex.torso.height - it.calcLayerTopOffset(tex.leftLeg),
+                    null
+                )
+            }
+
+            tex.rightLeg.let {
+                canvas.drawBitmap(
+                    it,
+                    tex.leftArm.width + tex.leftLeg.width,
+                    tex.head.height + tex.torso.height,
                     null
                 )
             }
@@ -244,4 +193,8 @@ private fun Bitmap.calcLayerLeftOffset(firstLayer: Bitmap): Int {
 
 private fun Bitmap.calcLayerTopOffset(firstLayer: Bitmap): Int {
     return this.height.minus(firstLayer.height).times(0.5f).toInt()
+}
+
+private fun Bitmap.half(): Bitmap {
+    return Bitmap.createBitmap(this, 0, 0, width, height / 2)
 }

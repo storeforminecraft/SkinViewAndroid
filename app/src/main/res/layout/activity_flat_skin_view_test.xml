@@ -9,6 +9,6 @@
     <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:skin="@raw/skin_steve" />
+        app:skin="@raw/skin_steve_legacy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

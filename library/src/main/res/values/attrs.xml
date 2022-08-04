@@ -2,5 +2,7 @@
 <resources>
     <declare-styleable name="FlatSkinView">
         <attr name="skin" format="reference" />
+        <attr name="halfview" format="boolean" />
+        <attr name="scale" format="integer" />
     </declare-styleable>
 </resources>
