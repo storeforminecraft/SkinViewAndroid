@@ -18,6 +18,9 @@ class FlatSkinView : View {
     private var scale = 32
     private var halfSkinMode = false
 
+    private val offsetX = 10
+    private val offsetY = 10
+
     constructor(context: Context) : super(context) {
     }
 
@@ -36,7 +39,7 @@ class FlatSkinView : View {
     private fun applyAttrs(context: Context, attrs: AttributeSet) {
         val at = context.obtainStyledAttributes(attrs, R.styleable.FlatSkinView, 0, 0)
 
-        var skinRes: Int = R.raw.skin_steve
+        var skinRes: Int = R.raw.steve
 
         for (i in 0 until at.indexCount) {
             val attr = at.getIndex(i)
@@ -81,9 +84,9 @@ class FlatSkinView : View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         if (halfSkinMode)
-            setMeasuredDimension(16 * scale, 32 * scale / 2)
+            setMeasuredDimension(16 * scale + (offsetX * 2), 32 * scale / 2)
         else
-            setMeasuredDimension(16 * scale, 32 * scale)
+            setMeasuredDimension(16 * scale + (offsetX * 2), 32 * scale + (offsetY * 2))
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -92,39 +95,42 @@ class FlatSkinView : View {
         if (canvas == null) return
 
         steveFrontTex.let { tex ->
+//            val offsetY: Float = tex.leftArm2nd?.calcLayerLeftOffset(tex.rightArm)?.toFloat() ?: 0f
+//            val offsetX: Float = tex.hat.calcLayerTopOffset(tex.head).toFloat()
+
             tex.head.let {
-                canvas.drawBitmap(it, tex.leftArm.width, 0, null)
+                canvas.drawBitmap(it, tex.leftArm.width, 0, null, offsetX, offsetY)
             }
             tex.hat.let {
                 canvas.drawBitmap(
                     it,
                     tex.leftArm.width - it.calcLayerLeftOffset(tex.head),
                     -it.calcLayerTopOffset(tex.head),
-                    null
+                    null, offsetX, offsetY
                 )
             }
 
             tex.torso.let {
-                canvas.drawBitmap(it, tex.leftArm.width, tex.head.height, null)
+                canvas.drawBitmap(it, tex.leftArm.width, tex.head.height, null, offsetX, offsetY)
             }
             tex.torso2nd?.let {
                 canvas.drawBitmap(
                     it,
                     tex.leftArm.width - it.calcLayerLeftOffset(tex.torso),
                     tex.head.height - it.calcLayerTopOffset(tex.torso),
-                    null
+                    null, offsetX, offsetY
                 )
             }
 
             tex.leftArm.let {
-                canvas.drawBitmap(it, 0, tex.head.height, null)
+                canvas.drawBitmap(it, 0, tex.head.height, null, offsetX, offsetY)
             }
             tex.leftArm2nd?.let {
                 canvas.drawBitmap(
                     it,
                     -it.calcLayerLeftOffset(tex.leftArm),
                     tex.head.height - it.calcLayerTopOffset(tex.leftArm),
-                    null
+                    null, offsetX, offsetY
                 )
             }
 
@@ -133,14 +139,14 @@ class FlatSkinView : View {
                     it,
                     tex.leftLeg.width + tex.torso.width,
                     tex.head.height,
-                    null
+                    null, offsetX, offsetY
                 )
             }
             tex.rightArm2nd?.let {
                 canvas.drawBitmap(
                     it,
                     tex.leftLeg.width + tex.torso.width - it.calcLayerLeftOffset(tex.rightArm),
-                    tex.head.height - it.calcLayerTopOffset(tex.rightArm), null
+                    tex.head.height - it.calcLayerTopOffset(tex.rightArm), null, offsetX, offsetY
                 )
             }
 
@@ -151,7 +157,7 @@ class FlatSkinView : View {
                     it,
                     tex.leftArm.width,
                     tex.head.height + tex.torso.height,
-                    null
+                    null, offsetX, offsetY
                 )
             }
             tex.leftLeg2nd?.let {
@@ -159,7 +165,7 @@ class FlatSkinView : View {
                     it,
                     tex.leftArm.width - it.calcLayerLeftOffset(tex.leftLeg),
                     tex.head.height + tex.torso.height - it.calcLayerTopOffset(tex.leftLeg),
-                    null
+                    null, offsetX, offsetY
                 )
             }
 
@@ -168,7 +174,7 @@ class FlatSkinView : View {
                     it,
                     tex.leftArm.width + tex.leftLeg.width,
                     tex.head.height + tex.torso.height,
-                    null
+                    null, offsetX, offsetY
                 )
             }
             tex.rightLeg2nd?.let {
@@ -176,15 +182,22 @@ class FlatSkinView : View {
                     it,
                     tex.leftArm.width + tex.leftLeg.width - it.calcLayerLeftOffset(tex.rightLeg),
                     tex.head.height + tex.torso.height - it.calcLayerTopOffset(tex.rightLeg),
-                    null
+                    null, offsetX, offsetY
                 )
             }
         }
     }
 }
 
-private fun Canvas.drawBitmap(it: Bitmap, left: Int, top: Int, paint: Paint?) {
-    this.drawBitmap(it, left.toFloat(), top.toFloat(), paint)
+private fun Canvas.drawBitmap(
+    it: Bitmap,
+    left: Int,
+    top: Int,
+    paint: Paint? = null,
+    offsetX: Int = 0,
+    offsetY: Int = 0
+) {
+    this.drawBitmap(it, left.toFloat() + offsetX, top.toFloat() + offsetY, paint)
 }
 
 private fun Bitmap.calcLayerLeftOffset(firstLayer: Bitmap): Int {
