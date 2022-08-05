@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_flat_skin_view_test.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25271739130434784" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.147" />
         <entry key="library/src/main/res/layout/item_flat_skin_view.xml" value="0.2890625" />
         <entry key="library/src/main/res/layout/layout_flatskin.xml" value="0.625" />
       </map>

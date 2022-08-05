@@ -5,6 +5,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import dev.storeforminecraft.skinviewandroid.library.R
+import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
 import dev.storeforminecraft.skinviewandroid.library.twodimension.texture.SteveFrontTexture
 import dev.storeforminecraft.skinviewandroid.library.twodimension.texture.SteveTextureUtil
 import java.io.IOException
@@ -74,7 +75,7 @@ class FlatSkinView : View {
 
     fun renderSkin(bitmap: Bitmap) {
         steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
-            scale(scale)
+            scale(scale / skinImageScale)
         }
         bitmap.recycle()
         invalidate()
@@ -84,9 +85,15 @@ class FlatSkinView : View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         if (halfSkinMode)
-            setMeasuredDimension(16 * scale + (offsetX * 2), 32 * scale / 2)
+            setMeasuredDimension(
+                16 * scale + (offsetX * 2),
+                32 * scale / 2
+            )
         else
-            setMeasuredDimension(16 * scale + (offsetX * 2), 32 * scale + (offsetY * 2))
+            setMeasuredDimension(
+                16 * scale + (offsetX * 2),
+                32 * scale + (offsetY * 2)
+            )
     }
 
     override fun onDraw(canvas: Canvas?) {

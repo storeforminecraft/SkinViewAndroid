@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:halfview="true"
-            app:scale="32" />
+            app:scale="48" />
 
         <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
             android:layout_width="wrap_content"
@@ -32,7 +32,8 @@
         <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:scale="32" />
+            app:scale="32"
+            app:skin="@raw/steve" />
 
         <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
             android:layout_width="wrap_content"

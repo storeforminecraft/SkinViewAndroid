@@ -6,6 +6,7 @@ import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureTyp
 
 data class SteveFrontTexture(
     val texType: ModelSourceTextureType,
+    val skinImageScale : Int = 1,
     var head: Bitmap,
     var hat: Bitmap,
     var torso: Bitmap,
