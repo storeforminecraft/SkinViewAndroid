@@ -82,6 +82,7 @@ class FlatSkinView : View {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
+        // on half skin mode, cut height 1/2
         if (halfSkinMode)
             setMeasuredDimension(
                 16 * scale + (offsetX * 2),
@@ -142,7 +143,7 @@ class FlatSkinView : View {
             tex.rightArm.let {
                 canvas.drawBitmap(
                     it,
-                    tex.leftLeg.width + tex.torso.width,
+                    tex.leftArm.width + tex.torso.width,
                     tex.head.height,
                     null, offsetX, offsetY
                 )
@@ -150,7 +151,7 @@ class FlatSkinView : View {
             tex.rightArm2nd?.let {
                 canvas.drawBitmap(
                     it,
-                    tex.leftLeg.width + tex.torso.width - it.calcLayerLeftOffset(tex.rightArm),
+                    tex.leftArm.width + tex.torso.width - it.calcLayerLeftOffset(tex.rightArm),
                     tex.head.height - it.calcLayerTopOffset(tex.rightArm), null, offsetX, offsetY
                 )
             }

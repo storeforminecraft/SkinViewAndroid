@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.opengl.GLES31
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
-import dev.storeforminecraft.skinviewandroid.library.threedimension.model.SteveModel
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -18,7 +17,7 @@ class SkinView3DRenderer : GLSurfaceView.Renderer {
     var angleY = 0f
     var angleX = 0f
     var bitmap: Bitmap? = null
-    lateinit var steve: SteveModel
+    lateinit var steve: Steve
 
     override fun onSurfaceCreated(unused: GL10, config: EGLConfig) {
         // Set the background frame color
@@ -34,7 +33,7 @@ class SkinView3DRenderer : GLSurfaceView.Renderer {
         GLES31.glEnable(GLES31.GL_CULL_FACE)
 
         bitmap?.also {
-            steve = SteveModel(it)
+            steve = Steve(it)
         }
     }
 

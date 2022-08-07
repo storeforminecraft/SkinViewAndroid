@@ -4,32 +4,53 @@ import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureTyp
 
 object Steve3DTexture {
     fun getSteveTexture(type: ModelSourceTextureType): FloatArray {
-        if (type == ModelSourceTextureType.RATIO_2_1) {
-            return getHeadTex(type) +
-                    getTorsoTex(type, 16f, 16f) +
-                    getLegArmTex(type, 40f, 16f) +
-                    getLegArmTex(type, 40f, 16f) +
-                    getLegArmTex(type, 0f, 16f) +
-                    getLegArmTex(type, 0f, 16f) +
-                    getHeadTex(type, 32f, 0f)
-        } else if (type == ModelSourceTextureType.RATIO_1_1) {
-            return getHeadTex(type) +
-                    getTorsoTex(type, 16f, 16f) +
-                    getLegArmTex(type, 32f, 48f) +
-                    getLegArmTex(type, 40f, 16f) +
-                    getLegArmTex(type, 16f, 48f) +
-                    getLegArmTex(type, 0f, 16f) +
-                    getHeadTex(type, 32f, 0f) +
-                    getTorsoTex(type, 16f, 32f) +
-                    getLegArmTex(type, 48f, 48f) +
-                    getLegArmTex(type, 40f, 32f) +
-                    getLegArmTex(type, 0f, 48f) +
-                    getLegArmTex(type, 0f, 32f)
+        when (type) {
+            ModelSourceTextureType.RATIO_2_1 -> {
+                return getHeadTex(type) +
+                        getTorsoTex(type, 16f, 16f) +
+                        getLegArmTex(type, 40f, 16f) +
+                        getLegArmTex(type, 40f, 16f) +
+                        getLegArmTex(type, 0f, 16f) +
+                        getLegArmTex(type, 0f, 16f) +
+                        getHeadTex(type, 32f, 0f)
+            }
+            ModelSourceTextureType.RATIO_1_1 -> {
+                return getHeadTex(type) +
+                        getTorsoTex(type, 16f, 16f) +
+                        getLegArmTex(type, 32f, 48f) +
+                        getLegArmTex(type, 40f, 16f) +
+                        getLegArmTex(type, 16f, 48f) +
+                        getLegArmTex(type, 0f, 16f) +
+                        getHeadTex(type, 32f, 0f) +
+                        getTorsoTex(type, 16f, 32f) +
+                        getLegArmTex(type, 48f, 48f) +
+                        getLegArmTex(type, 40f, 32f) +
+                        getLegArmTex(type, 0f, 48f) +
+                        getLegArmTex(type, 0f, 32f)
+            }
+            ModelSourceTextureType.RATIO_1_1_SLIM -> {
+                return getHeadTex(type) +
+                        getTorsoTex(type, 16f, 16f) +
+                        getSlimArmTex(type, 32f, 48f) +
+                        getSlimArmTex(type, 40f, 16f) +
+                        getLegArmTex(type, 16f, 48f) +
+                        getLegArmTex(type, 0f, 16f) +
+                        getHeadTex(type, 32f, 0f) +
+                        getTorsoTex(type, 16f, 32f) +
+                        getSlimArmTex(type, 48f, 48f) +
+                        getSlimArmTex(type, 40f, 32f) +
+                        getLegArmTex(type, 0f, 48f) +
+                        getLegArmTex(type, 0f, 32f)
+            }
+            else -> return floatArrayOf()
         }
-        return floatArrayOf()
     }
 
-    fun getHeadTex(type: ModelSourceTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
+    fun getHeadTex(
+        type: ModelSourceTextureType,
+        offsetU: Float = 0f,
+        offsetV: Float = 0f
+    ): FloatArray {
         return floatArrayOf(
             // back
             32f, 8f, 32f, 16f, 24f, 16f, 24f, 8f,
@@ -89,12 +110,49 @@ object Steve3DTexture {
                 fl / 64f
             }
         }
+        return tex.toFloatArray()
+    }
 
+    fun getSlimArmTex(
+        type: ModelSourceTextureType,
+        offsetU: Float = 0f,
+        offsetV: Float = 0f,
+    ): FloatArray {
+        val tex = floatArrayOf(
+            // back
+            11f, 4f, 11f, 16f, 14f, 16f, 14f, 4f,
+            // front
+            4f, 4f, 4f, 16f, 7f, 16f, 7f, 4f,
+            // left
+            0f, 4f, 0f, 16f, 4f, 16f, 4f, 4f,
+            // right
+            7f, 4f, 7f, 16f, 10f, 16f, 10f, 4f,
+            // top
+            4f, 0f, 4f, 4f, 7f, 4f, 7f, 0f,
+            // bottom
+            10f, 0f, 10f, 4f, 7f, 4f, 7f, 0f,
+        ).mapIndexed { index, fl ->
+            if (index % 2 == 0) {
+                fl + offsetU
+            } else {
+                fl + offsetV
+            }
+        }.mapIndexed { index, fl ->
+            if (index % 2 != 0 && type == ModelSourceTextureType.RATIO_2_1) {
+                fl / 32f
+            } else {
+                fl / 64f
+            }
+        }
         return tex.toFloatArray()
     }
 
 
-    fun getTorsoTex(type: ModelSourceTextureType, offsetU: Float = 0f, offsetV: Float = 0f): FloatArray {
+    fun getTorsoTex(
+        type: ModelSourceTextureType,
+        offsetU: Float = 0f,
+        offsetV: Float = 0f
+    ): FloatArray {
         return floatArrayOf(
             // back
             24f, 4f, 24f, 16f, 16f, 16f, 16f, 4f,

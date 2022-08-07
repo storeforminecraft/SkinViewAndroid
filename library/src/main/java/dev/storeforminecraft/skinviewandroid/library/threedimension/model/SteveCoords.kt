@@ -9,7 +9,7 @@ object SteveCoords {
     fun getSteve(modelType: ModelSourceTextureType): Pair<FloatArray, ShortArray> {
         val steveCoords = mutableListOf<Float>()
         val steveIndicies =
-            CubeCoords.getCubeIndicies(if (modelType == ModelSourceTextureType.RATIO_1_1) 12 else 7)
+            CubeCoords.getCubeIndicies(if (modelType == ModelSourceTextureType.RATIO_2_1) 7 else 12)
 
 
         // Head
@@ -22,24 +22,46 @@ object SteveCoords {
             steveCoords.addAll(it.toList())
         }
 
-        // Left Arm
-        CubeCoords.getSquare(
-            multiplyX = 0.5f,
-            multiplyZ = 0.5f,
-            multiplyY = 1.5f,
-            addX = 1.5f * CubeCoords.unit
-        ).also {
-            steveCoords.addAll(it.toList())
-        }
+        if (modelType == ModelSourceTextureType.RATIO_1_1_SLIM) {
+            // Left Arm
+            CubeCoords.getSquare(
+                multiplyX = 0.375f,
+                multiplyZ = 0.5f,
+                multiplyY = 1.5f,
+                addX = 1.375f * CubeCoords.unit
+            ).also {
+                steveCoords.addAll(it.toList())
+            }
 
-        // Right Arm
-        CubeCoords.getSquare(
-            multiplyX = 0.5f,
-            multiplyZ = 0.5f,
-            multiplyY = 1.5f,
-            addX = -1.5f * CubeCoords.unit
-        ).also {
-            steveCoords.addAll(it.toList())
+            // Right Arm
+            CubeCoords.getSquare(
+                multiplyX = 0.375f,
+                multiplyZ = 0.5f,
+                multiplyY = 1.5f,
+                addX = -1.375f * CubeCoords.unit
+            ).also {
+                steveCoords.addAll(it.toList())
+            }
+        } else {
+            // Left Arm
+            CubeCoords.getSquare(
+                multiplyX = 0.5f,
+                multiplyZ = 0.5f,
+                multiplyY = 1.5f,
+                addX = 1.5f * CubeCoords.unit
+            ).also {
+                steveCoords.addAll(it.toList())
+            }
+
+            // Right Arm
+            CubeCoords.getSquare(
+                multiplyX = 0.5f,
+                multiplyZ = 0.5f,
+                multiplyY = 1.5f,
+                addX = -1.5f * CubeCoords.unit
+            ).also {
+                steveCoords.addAll(it.toList())
+            }
         }
 
         // Left Leg
@@ -72,7 +94,7 @@ object SteveCoords {
             steveCoords.addAll(it.toList())
         }
 
-        if (modelType == ModelSourceTextureType.RATIO_1_1) {
+        if (modelType != ModelSourceTextureType.RATIO_2_1) {
             // Torso 2nd layer
             CubeCoords.getSquare(
                 multiplyZ = 0.5f,
@@ -82,26 +104,50 @@ object SteveCoords {
                 steveCoords.addAll(it.toList())
             }
 
-            // Left Arm 2nd Layer
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = 1.5f * CubeCoords.unit,
-                enlarge = 1.125f
-            ).also {
-                steveCoords.addAll(it.toList())
-            }
+            if (modelType == ModelSourceTextureType.RATIO_1_1_SLIM) {
+                // Left Arm 2nd Layer
+                CubeCoords.getSquare(
+                    multiplyX = 0.375f,
+                    multiplyZ = 0.5f,
+                    multiplyY = 1.5f,
+                    addX = 1.375f * CubeCoords.unit,
+                    enlarge = 1.125f
+                ).also {
+                    steveCoords.addAll(it.toList())
+                }
 
-            // Right Arm 2nd Layer
-            CubeCoords.getSquare(
-                multiplyX = 0.5f,
-                multiplyZ = 0.5f,
-                multiplyY = 1.5f,
-                addX = -1.5f * CubeCoords.unit,
-                enlarge = 1.125f
-            ).also {
-                steveCoords.addAll(it.toList())
+                // Right Arm 2nd Layer
+                CubeCoords.getSquare(
+                    multiplyX = 0.375f,
+                    multiplyZ = 0.5f,
+                    multiplyY = 1.5f,
+                    addX = -1.375f * CubeCoords.unit,
+                    enlarge = 1.125f
+                ).also {
+                    steveCoords.addAll(it.toList())
+                }
+            } else {
+                // Left Arm 2nd Layer
+                CubeCoords.getSquare(
+                    multiplyX = 0.5f,
+                    multiplyZ = 0.5f,
+                    multiplyY = 1.5f,
+                    addX = 1.5f * CubeCoords.unit,
+                    enlarge = 1.125f
+                ).also {
+                    steveCoords.addAll(it.toList())
+                }
+
+                // Right Arm 2nd Layer
+                CubeCoords.getSquare(
+                    multiplyX = 0.5f,
+                    multiplyZ = 0.5f,
+                    multiplyY = 1.5f,
+                    addX = -1.5f * CubeCoords.unit,
+                    enlarge = 1.125f
+                ).also {
+                    steveCoords.addAll(it.toList())
+                }
             }
 
             // Left Leg 2nd Layer

@@ -1,4 +1,4 @@
-package dev.storeforminecraft.skinviewandroid.library.threedimension.model
+package dev.storeforminecraft.skinviewandroid.library.threedimension.render
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -6,6 +6,8 @@ import android.opengl.GLES31
 import android.opengl.GLUtils
 import dev.storeforminecraft.skinviewandroid.library.libs.BufferUtil
 import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
+import dev.storeforminecraft.skinviewandroid.library.libs.SkinUtil
+import dev.storeforminecraft.skinviewandroid.library.threedimension.model.SteveCoords
 import dev.storeforminecraft.skinviewandroid.library.threedimension.model.texture.Steve3DTexture
 import dev.storeforminecraft.skinviewandroid.library.threedimension.render.SkinView3DRenderer.Companion.loadShader
 import java.nio.FloatBuffer
@@ -14,7 +16,7 @@ import java.nio.ShortBuffer
 /**
  * Minecraft Character Model for OpenGl render
  */
-class SteveModel(val bitmap: Bitmap) {
+class Steve(val bitmap: Bitmap) {
     private val vertexShaderCode =
     // This matrix member variable provides a hook to manipulate
         // the coordinates of the objects that use this vertex shader
@@ -53,8 +55,7 @@ class SteveModel(val bitmap: Bitmap) {
         val vertexShader: Int = loadShader(GLES31.GL_VERTEX_SHADER, vertexShaderCode)
         val fragmentShader: Int = loadShader(GLES31.GL_FRAGMENT_SHADER, fragmentShaderCode)
 
-        steveModelType =
-            if (bitmap.width == bitmap.height) ModelSourceTextureType.RATIO_1_1 else ModelSourceTextureType.RATIO_2_1
+        steveModelType = SkinUtil.getTexType(bitmap)
 
         val steve = SteveCoords.getSteve(steveModelType)
         steveModelCoords = steve.first
