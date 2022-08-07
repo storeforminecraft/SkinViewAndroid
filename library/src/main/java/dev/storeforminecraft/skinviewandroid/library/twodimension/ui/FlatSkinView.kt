@@ -14,7 +14,7 @@ import java.io.InputStream
 
 class FlatSkinView : View {
 
-    private lateinit var steveFrontTex: SteveFrontTexture
+    lateinit var steveFrontTex: SteveFrontTexture
 
     var scale = 32
     var halfSkinMode = false

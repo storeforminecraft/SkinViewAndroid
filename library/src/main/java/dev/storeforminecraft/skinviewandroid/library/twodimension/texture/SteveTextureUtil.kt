@@ -14,6 +14,7 @@ object SteveTextureUtil {
 
         val tex = if (texType == ModelSourceTextureType.RATIO_1_1) {
             SteveFrontTexture(
+                skin,
                 texType = texType,
                 skinImageScale = scale,
                 head = Bitmap.createBitmap(skin, 8 * scale, 8 * scale, 8 * scale, 8 * scale),
@@ -31,6 +32,7 @@ object SteveTextureUtil {
             )
         } else {
             SteveFrontTexture(
+                skin,
                 texType = texType,
                 skinImageScale = 1,
                 head = Bitmap.createBitmap(skin, 8, 8, 8, 8),
