@@ -16,11 +16,10 @@ class FlatSkinView : View {
 
     private lateinit var steveFrontTex: SteveFrontTexture
 
-    private var scale = 32
-    private var halfSkinMode = false
-
-    private val offsetX = 10
-    private val offsetY = 10
+    var scale = 32
+    var halfSkinMode = false
+    var offsetX = 10
+    var offsetY = 10
 
     constructor(context: Context) : super(context) {
     }
