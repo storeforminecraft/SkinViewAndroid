@@ -76,7 +76,6 @@ class FlatSkinView : View {
         steveFrontTex = SteveTextureUtil.getSteveFrontTex(bitmap).apply {
             scale(scale / skinImageScale)
         }
-        bitmap.recycle()
         invalidate()
     }
 

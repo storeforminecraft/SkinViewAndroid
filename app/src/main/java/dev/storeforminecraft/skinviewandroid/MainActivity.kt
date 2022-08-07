@@ -8,7 +8,7 @@ import dev.storeforminecraft.skinviewandroid.library.threedimension.ui.SkinView3
 import java.io.IOException
 import java.io.InputStream
 
-class  MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var gLView: SkinView3DSurfaceView
 
