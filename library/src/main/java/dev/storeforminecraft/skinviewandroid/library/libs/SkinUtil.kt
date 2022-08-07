@@ -9,12 +9,20 @@ import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureTyp
 object SkinUtil {
 
     fun getTexType(bitmap: Bitmap): ModelSourceTextureType {
-        return if (SkinUtil.isSlimSkin(bitmap)) ModelSourceTextureType.RATIO_1_1_SLIM
-        else if (bitmap.width == bitmap.height) ModelSourceTextureType.RATIO_1_1
-        else ModelSourceTextureType.RATIO_2_1
+        return if (bitmap.width >= 64 && bitmap.height >= 64 && bitmap.width == bitmap.height) {
+            if (isSlimSkin(bitmap)) {
+                ModelSourceTextureType.RATIO_1_1_SLIM
+            } else {
+                ModelSourceTextureType.RATIO_1_1
+            }
+        } else if (bitmap.width == bitmap.height * 2) {
+            ModelSourceTextureType.RATIO_2_1
+        } else {
+            ModelSourceTextureType.UNKNOWN
+        }
     }
 
-    fun isSlimSkin(bitmap: Bitmap): Boolean {
+    private fun isSlimSkin(bitmap: Bitmap): Boolean {
         val scale = bitmap.width / 64
         return checkColor(
             bitmap,
@@ -43,7 +51,7 @@ object SkinUtil {
                 checkColor(bitmap, 46 * scale, 52 * scale, 2 * scale, 12 * scale, Color.TRANSPARENT)
     }
 
-    fun checkColor(bitmap: Bitmap, x: Int, y: Int, w: Int, h: Int, checkColor: Int): Boolean {
+    private fun checkColor(bitmap: Bitmap, x: Int, y: Int, w: Int, h: Int, checkColor: Int): Boolean {
         for (wi in 1..w) {
             for (hi in 1..h) {
                 if (bitmap[x + wi, y + hi] != checkColor) {
