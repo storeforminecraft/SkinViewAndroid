@@ -52,8 +52,8 @@ object SkinUtil {
     }
 
     private fun checkColor(bitmap: Bitmap, x: Int, y: Int, w: Int, h: Int, checkColor: Int): Boolean {
-        for (wi in 1..w) {
-            for (hi in 1..h) {
+        for (wi in 0 until w) {
+            for (hi in 0 until h) {
                 if (bitmap[x + wi, y + hi] != checkColor) {
                     return false
                 }
