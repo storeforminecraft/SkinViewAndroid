@@ -3,6 +3,7 @@ package dev.storeforminecraft.skinviewandroid.library.twodimension.ui
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import dev.storeforminecraft.skinviewandroid.library.R
 import dev.storeforminecraft.skinviewandroid.library.datas.ModelSourceTextureType
@@ -82,15 +83,17 @@ class FlatSkinView : View {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
+        val slim: Boolean = steveFrontTex.texType == ModelSourceTextureType.RATIO_1_1_SLIM
+
         // on half skin mode, cut height 1/2
         if (halfSkinMode)
             setMeasuredDimension(
-                16 * scale + (offsetX * 2),
+                (if (slim) 14 else 16) * scale + (offsetX * 2),
                 32 * scale / 2
             )
         else
             setMeasuredDimension(
-                16 * scale + (offsetX * 2),
+                (if (slim) 14 else 16) * scale + (offsetX * 2),
                 32 * scale + (offsetY * 2)
             )
     }
