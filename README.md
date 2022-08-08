@@ -82,4 +82,4 @@ class MainActivity : AppCompatActivity() {
 
 CONTACT : manager@storeforminecraft.com
 
-[LICENSE](LICNESE.md)
+[LICENSE](LICENSE.md)
