@@ -40,7 +40,7 @@ class FlatSkinView : View {
     private fun applyAttrs(context: Context, attrs: AttributeSet) {
         val at = context.obtainStyledAttributes(attrs, R.styleable.FlatSkinView, 0, 0)
 
-        var skinRes: Int = R.raw.steve
+        var skinRes: Int = R.raw.sfomskin_b
 
         for (i in 0 until at.indexCount) {
             val attr = at.getIndex(i)

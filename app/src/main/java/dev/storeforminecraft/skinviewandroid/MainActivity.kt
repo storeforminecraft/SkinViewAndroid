@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         gLView = SkinView3DSurfaceView(this)
 
         val `is`: InputStream = resources
-            .openRawResource(R.raw.steve)
+            .openRawResource(R.raw.sfomskin_b)
         val bitmap: Bitmap = try {
             BitmapFactory.decodeStream(`is`)
         } finally {

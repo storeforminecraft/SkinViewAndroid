@@ -15,12 +15,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:halfview="true"
-            app:scale="48" />
+            app:skin="@raw/sfomskin_a"
+            app:scale="32" />
 
         <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:halfview="true"
+            app:skin="@raw/sfomskin_b"
             app:scale="16" />
 
     </LinearLayout>
@@ -33,11 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:scale="32"
-            app:skin="@raw/skin" />
+            app:skin="@raw/sfomskin_b"
+            app:halfview="false" />
 
         <dev.storeforminecraft.skinviewandroid.library.twodimension.ui.FlatSkinView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:skin="@raw/sfomskin_a"
             app:scale="16" />
 
     </LinearLayout>
