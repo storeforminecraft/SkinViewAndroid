@@ -82,5 +82,4 @@ class MainActivity : AppCompatActivity() {
 
 CONTACT : manager@storeforminecraft.com
 
-[LICENSE]: https://github.com/storeforminecraft/SkinViewAndroid/blob/master/LICENSE
-
+[LICENSE](LICNESE.md)
