@@ -36,7 +36,7 @@ dependencies {
 
 ## 3D SkinView
 
-<img src="./README.assets/demo2.gif" alt="demo2" style="zoom: 33%;" />
+<img src="./README.assets/demo2.gif" alt="demo2" width="300" height="666" />
 
 3D SkinView is implemented using Open GL. You can use "SkinView3DSurfaceView" by adding it to an existing layout or setting it as the Activity's ContentView.
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
 ## 2D SkinView
 
-<img src="./README.assets/demo1.png" alt="demo1" style="zoom:25%;" />
+<img src="./README.assets/demo1.png" alt="demo1" width="270" height="600" />
 
 2DSkinView renders the front part of the skin. 
 
