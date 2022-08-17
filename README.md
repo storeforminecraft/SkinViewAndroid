@@ -36,6 +36,8 @@ dependencies {
 
 ## 3D SkinView
 
+<img src="/Users/luckytmrw/AndroidStudioProjects/SkinViewAndroid/README.assets/demo2.gif" alt="demo2" style="zoom: 33%;" />
+
 3D SkinView is implemented using Open GL. You can use "SkinView3DSurfaceView" by adding it to an existing layout or setting it as the Activity's ContentView.
 
 ```kotlin
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 ```
 
 ## 2D SkinView
+
+<img src="/Users/luckytmrw/AndroidStudioProjects/SkinViewAndroid/README.assets/demo1.png" alt="demo1" style="zoom:25%;" />
 
 2DSkinView renders the front part of the skin. 
 
